@@ -28,6 +28,7 @@ class Location {
             return
         }
         
+        //!Extract queried city and country
         if let requestFor = data["request"] as? [Dictionary<String, AnyObject>] {
             let queryDict = requestFor[0]
             let queryString = queryDict["query"] as! String
@@ -36,11 +37,13 @@ class Location {
             self.country = queryComponents.last
         }
         
+        //!Parse current condition.
         if let currentCondition = data["current_condition"] as? [Dictionary<String, AnyObject>] {
             let currenConditionDict = currentCondition[0]
             self.currentWeatherCondition = WeatherData(with: currenConditionDict)
         }
         
+        //!Parse future conditions.
         if let futureConditions = data["weather"] as? [Dictionary<String, AnyObject>] {
             self.futureWeatherConditions = [WeatherData]()
             for futureCondDict in futureConditions {

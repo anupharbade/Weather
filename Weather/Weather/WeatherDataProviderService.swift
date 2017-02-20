@@ -35,7 +35,10 @@ class WeatherDataProviderService {
                 }
                 
                 let currentLocation = Location(with: jsonData)
-                completionHandler(currentLocation, nil)
+                
+                DispatchQueue.main.async {
+                    completionHandler(currentLocation, nil)
+                }
             }
             
         }
